@@ -1,14 +1,19 @@
 #include "rshell.h"
 #include <boost/tokenizer.hpp>
+using namespace boost;
 
 int main()
 {
-  const int MAX_CHAR = 100;
-  char input[MAX_CHAR];
+    string input;
 
-  cout << "Enter your command: ";
-  cin.getline(input, MAX_CHAR);
+    cout << "Enter your command: ";
+    getline(cin, input);
+ 
+    tokenizer<> tok(input);
 
-  cout << input << endl;
+    for(tokenizer<>::iterator beg=tok.begin(); beg!=tok.end();++beg)
+    {
+       cout << *beg << "\n";
+    }
 
 }
