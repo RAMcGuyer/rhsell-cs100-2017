@@ -8,12 +8,16 @@ int main()
 
     cout << "Enter your command: ";
     getline(cin, input);
- 
-    tokenizer<> tok(input);
 
-    for(tokenizer<>::iterator beg=tok.begin(); beg!=tok.end();++beg)
+    typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
+    boost::char_separator<char> sep("&&", "||", boost::keep_empty_tokens);
+    tokenizer tokens(input, sep);
+
+    for (tokenizer::iterator tok_iter = tokens.begin();
+         tok_iter != tokens.end(); ++tok_iter)
     {
-       cout << *beg << "\n";
+        cout << *tok_iter;
+        cout << "\n";
     }
 
 }
