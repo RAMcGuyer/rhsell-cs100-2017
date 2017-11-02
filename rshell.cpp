@@ -50,9 +50,7 @@ int main()
 		cmds.push(inputs[i]);
 		cout << "Index [" << i << "]: " << inputs[i] << endl;
 	}
-	
-	execute();
-		
+			
 	return 0;  
 	
 }

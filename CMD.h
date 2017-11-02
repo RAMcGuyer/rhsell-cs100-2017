@@ -1,0 +1,28 @@
+#ifndef __CMD_H__
+#define __CMD_H__
+
+#include <iostream>
+
+class CMD : public Base
+{
+	private:
+		vector<string>* statement;
+	public:
+	
+	CMD() : Base() {};
+	CMD(vector<string>& prompt) : Base() 
+	{
+		statement = &prompt;
+	};
+	
+
+	void execute()
+	{
+		for(int i = 0; i < statement->size(); i++)
+		{
+			cout << statement->at(i) << endl;
+		}
+	}
+};
+
+#endif
