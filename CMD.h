@@ -16,7 +16,7 @@ class CMD : public Base
 	};
 	
 
-	void execute()
+	void execute() //MAKE SURE TO SET didFail bool when execvp runs 
 	{
 		for(int i = 0; i < statement->size(); i++)
 		{

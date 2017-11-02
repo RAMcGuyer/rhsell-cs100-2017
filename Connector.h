@@ -5,14 +5,14 @@
 
 class Connector : public Base
 {
-    private:
+    protected:
         Base *left;
         Base *right;
 
     public:
         Connector();
         Connector(Base *left, Base *right);
-        virtual void exec()=0;
+        virtual void execute()=0; 
 };
 
 #endif

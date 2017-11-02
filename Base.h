@@ -6,11 +6,22 @@
 using namespace std;
 class Base
 {
+    
+    private:
+        bool failed; // to check if the execvp function failed or not in execute	
+    
+    public:
+        Base()
+        {
+            failed = false;
+        };
 		
-	public:
-		Base(){};
-		
-		virtual void execute() = 0;	
+        virtual void execute() = 0;
+        
+        bool getFail()
+        {
+            return this->failed;
+        }	
 };
 
 #endif
