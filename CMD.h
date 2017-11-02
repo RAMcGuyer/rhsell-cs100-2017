@@ -13,6 +13,7 @@ class CMD : public Base
 	CMD(vector<string>& prompt) : Base() 
 	{
 		statement = &prompt;
+		this->setFailed(true);
 	};
 	
 
@@ -22,6 +23,15 @@ class CMD : public Base
 		{
 			cout << statement->at(i) << endl;
 		}
+	}
+	
+	bool setfailed(bool b)
+	{
+		Base::failed = b;
+	}
+	bool getFail()
+	{
+		return Base::getFail();
 	}
 };
 
