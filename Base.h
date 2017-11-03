@@ -21,6 +21,10 @@ class Base
         bool getFail()
         {
             return this->failed;
+        }
+        void setFail(bool didFail)
+        {
+            this->failed = didFail;
         }	
 };
 

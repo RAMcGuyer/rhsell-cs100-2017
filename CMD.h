@@ -13,21 +13,30 @@ class CMD : public Base
 	CMD(vector<string>& prompt) : Base() 
 	{
 		statement = &prompt;
-		this->setFailed(true);
 	};
 	
 
 	void execute() //MAKE SURE TO SET didFail bool when execvp runs 
 	{
-		for(int i = 0; i < statement->size(); i++)
-		{
-			cout << statement->at(i) << endl;
-		}
-	}
-	
-	bool setfailed(bool b)
-	{
-		Base::failed = b;
+             pid_t pid;
+             int status;
+
+             if ((pid = fork()) < 0) //fork failed
+             {
+                 printf("*** ERROR: exec failed\n");
+                 exit(1);
+             }
+             else if (pid ==0) //fork to child
+             {
+                 if (execvp(statement->at(0), statement) < 0) //if execvp failed
+                 {
+                    this->setFail(true); 
+                 } 
+             }
+             else
+             {
+                 while (wait(&status) != pid);
+             }
 	}
 	bool getFail()
 	{
