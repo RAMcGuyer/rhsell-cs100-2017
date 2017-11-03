@@ -27,6 +27,7 @@ int main()
 	string input;
 	vector<string> inputs;
 	queue<string> cmds;
+        CMD command = new CMD(inputs);
 
 	cout << "Enter your command: ";
 	getline(cin, input);

@@ -2,6 +2,7 @@
 #define __CMD_H__
 
 #include <iostream>
+#include "Base.h"
 
 class CMD : public Base
 {
@@ -10,9 +11,9 @@ class CMD : public Base
 	public:
 	
 	CMD() : Base() {};
-	CMD(vector<string>& prompt) : Base() 
+	CMD(vector<string> *prompt) : Base() 
 	{
-		statement = &prompt;
+		statement = prompt;
 	};
 	
 
@@ -28,7 +29,7 @@ class CMD : public Base
              }
              else if (pid ==0) //fork to child
              {
-                 if (execvp(statement->at(0), statement) < 0) //if execvp failed
+                 if (execvp(statement->at(0).c_str(), statement->c_str) < 0) //if execvp failed
                  {
                     this->setFail(true); 
                  } 
