@@ -17,7 +17,7 @@ class CMD : public Base
 	};
 	
 
-	void execute() //MAKE SURE TO SET didFail bool when execvp runs 
+	/*void execute() //MAKE SURE TO SET didFail bool when execvp runs 
 	{
              pid_t pid;
              int status;
@@ -38,7 +38,7 @@ class CMD : public Base
              {
                  while (wait(&status) != pid);
              }
-	}
+	}*/
 	bool getFail()
 	{
 		return Base::getFail();
