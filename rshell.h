@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include "Base.h"
 #include "CMD.h"
+#include "CMDS.h"
 
 using namespace std;
 

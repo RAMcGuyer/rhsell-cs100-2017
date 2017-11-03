@@ -5,9 +5,10 @@
 
 class And : public Connector
 {
+            
     public:
-         And();
-         And(Base *left, Base *right);
+         And(): Connector() {};
+         And(Base *left, Base *right): Connector(left, right){};
          void execute();
 };
 

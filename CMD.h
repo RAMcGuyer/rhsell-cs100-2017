@@ -28,6 +28,7 @@ class CMD : public Base
    for(i; i < this->statement.size(); i++)
    {
      temp = this->statement.at(i);
+     temp.erase(temp.find_last_of(" \n\t\r")+1);
      args[i] = (char*) temp.c_str();
    }
    

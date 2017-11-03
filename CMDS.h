@@ -1,17 +1,56 @@
 #ifndef __CMDS_H__
 #define __CMDS_H__
 
+#include "CMD.h"
+
 class CMDS : public Base
 {
         private:
-            vector<Base> commands;
-
-        public:
-            CMDS(queue &q) : Base()
+            vector<Base*> commands;
+            
+            vector<string> makeNewCMD(int ctr, vector<string> &input)
             {
-                fillCommands(q)
+              vector<string> vec;
+              vector<string>::iterator it; 
+              for(int i = 0; i < ctr; i++)
+              {
+                it = vec.begin();
+                if(input.at(0) != ";")
+                {
+                  vec.push_back(input.at(0));
+                }
+                input.erase(it);
+              }
+              
+              return vec;
             }
 
+        public:
+            CMDS(vector<string> &input) : Base()
+            {
+                fillCommands(input);
+            }
+            
+            void add(Base *b)
+            {
+              this->commands.push_back(b);
+            }
+            
+            void fillCommands(vector<string> &input)
+            {
+              int ctr = 0;
+              vector<string> tempVec;
+              while(ctr < input.size())
+              {
+                if((input.at(ctr) == ";") || (ctr == input.size()-1))
+                {
+                  tempVec = this->makeNewCMD(ctr, input);
+                  CMD tempCMD(tempVec); 
+                  this->add(tempCMD);
+                }
+              }  
+            }
+/*
             void fillCommands(vector<string> *v)
             {
                 vector<string> *parsedStr;
@@ -32,9 +71,9 @@ class CMDS : public Base
                     else if(v->at(i) == "&&")
                     {
                          CMD newCmd(parsedStr);
-                         for(int j = i; j < v->size(); j++) //run through the vector to get the command to the right
+     for(int j = i; j < v->size(); j++) //run through the vector to get the command to the right
                          {
-                             if(v->at(j) != ";" && v->at(j) != "&&" && v->at(j) != "||" && v->at(j) != "exit")
+     if(v->at(j) != ";" && v->at(j) != "&&" && v->at(j) != "||" && v->at(j) != "exit")
                              {
                                  parsedStr2->push_back(v->at(j));
                              }
@@ -52,10 +91,10 @@ class CMDS : public Base
                 }
 
             }
-            
+       */     
             void execute()
             {
-                for(int i = 0; i < commands.size(); i++
+                for(int i = 0; i < commands.size(); i++)
                 {
                     commands[i] -> execute();
                 }
