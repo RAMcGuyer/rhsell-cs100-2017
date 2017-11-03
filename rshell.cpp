@@ -2,12 +2,12 @@
 
 using namespace boost;
 
-
 int main()
 {
 	string input;
 	vector<string> *inputs;
-
+	queue<string> cmds;
+        
 	cout << "Enter your command: ";
 	getline(cin, input);
 
@@ -22,7 +22,7 @@ int main()
 	{
 		inputs->push_back(*tok_iter);
 	}
-			
+		
 	return 0;  
 	
 }
