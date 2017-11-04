@@ -1,5 +1,4 @@
 #include "rshell.h"
-#include "CmdQueues.h"
 using namespace boost;
 
 queue<string>* seperateCmds(vector<string> &inputs)
@@ -62,6 +61,7 @@ int main()
         vector<string> inputs;
         queue<string> *cmds;
         queue<string> *connectors;
+        vector<CMD> actualCmds;
 	cout << "$ ";
 	getline(cin, input);
 
@@ -83,6 +83,10 @@ int main()
         while(!(cmds->empty()))
         {
             cout << "In cmd queue: " << cmds->front() << endl;
+
+            CMD tempCmd(cmds->front());
+            actualCmds.push_back(tempCmd);
+           
             cmds->pop();
         }
         cout << endl;
@@ -91,6 +95,11 @@ int main()
         {
             cout << "In connector queue: " << connectors->front() << endl;
             connectors->pop();
+        }
+
+        for(unsigned i = 0; i < actualCmds.size(); i++)
+        {
+            actualCmds.at(i).execute();
         }
   	
 	return 0;  
