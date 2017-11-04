@@ -16,6 +16,10 @@ class CMD : public Base
 		this->createStatement(s);
 	};
 	
+ /* CREATESTATEMENT
+   Takes the string passsed into the constructor and creates a vector<string> for 
+   later use in the execute function.
+ */
   void createStatement(string s)
   {
     typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
@@ -29,8 +33,14 @@ class CMD : public Base
 	  	this->statement.push_back(*tok_iter);
 	  }
   }
-
-  void execute() //MAKE SURE TO SET didFail bool when execvp runs 
+  
+  /* VOID EXECUTE()
+    Creates an array of char* from the vector<string> statement. The program then
+    forks, and execvp() is called in the child using the array of char* as arguments.
+    If the child process execvp() fails, status equals -1 and a boolean is set to true
+    to indicate the failure. 
+  */
+  void execute() 
 	{
    pid_t pid;
    int status;
@@ -42,9 +52,7 @@ class CMD : public Base
    {
      statement.at(i).erase(statement.at(i).find_last_not_of(" \n\t\r")+1);
      args[i] = (char*) statement.at(i).c_str();
-     cout << i << " "<< args[0] << endl;
    }
-   cout << args[0] << " " << args[1] << endl;
    args[statement.size()] = NULL;
    if ((pid = fork()) < 0) //fork failed
    {
@@ -53,16 +61,18 @@ class CMD : public Base
    }
    else if (pid ==0) //fork to child
    {
-     cout << "in child" << endl;
      if (execvp(args[0], args) == -1) //if execvp failed
      {
         perror("exec");
-        Base::setFail(true); 
      } 
    } 
    else
    {
       while (wait(&status) != pid);
+      if(WEXITSTATUS(status) == -1)
+      {
+        Base::setFail(true);
+      }
    }
 }
 	
