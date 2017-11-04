@@ -6,6 +6,7 @@
 #include <string>
 #include <boost/tokenizer.hpp>
 #include <boost/algorithm/string/trim.hpp>
+#include <boost/algorithm/string/join.hpp>
 #include <queue>
 #include <vector>
 #include <stdio.h>
