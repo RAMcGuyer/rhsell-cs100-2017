@@ -2,17 +2,17 @@
 #define __CMDS_H__
 
 #include "CMD.h"
-
+/*
 class CMDS : public Base
 {
         private:
             vector<Base*> commands;
             
-            vector<string> makeNewCMD(int ctr, vector<string> &input)
+            vector<string> makeNewCMD(unsigned ctr, vector<string> &input)
             {
               vector<string> vec;
               vector<string>::iterator it; 
-              for(int i = 0; i < ctr; i++)
+              for(unsigned i = 0; i < ctr; i++)
               {
                 it = vec.begin();
                 if(input.at(0) != ";")
@@ -38,19 +38,19 @@ class CMDS : public Base
             
             void fillCommands(vector<string> &input)
             {
-              int ctr = 0;
+              unsigned ctr = 0;
               vector<string> tempVec;
               while(ctr < input.size())
               {
                 if((input.at(ctr) == ";") || (ctr == input.size()-1))
                 {
                   tempVec = this->makeNewCMD(ctr, input);
-                  CMD tempCMD(tempVec); 
+                  CMD *tempCMD = new CMD(tempVec); 
                   this->add(tempCMD);
                 }
               }  
             }
-/*
+
             void fillCommands(vector<string> *v)
             {
                 vector<string> *parsedStr;
@@ -91,10 +91,10 @@ class CMDS : public Base
                 }
 
             }
-       */     
+            
             void execute()
             {
-                for(int i = 0; i < commands.size(); i++)
+                for(unsigned i = 0; i < commands.size(); i++)
                 {
                     commands[i] -> execute();
                 }
@@ -102,6 +102,6 @@ class CMDS : public Base
 
             
 };
-
+*/
 #endif
 

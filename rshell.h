@@ -16,6 +16,9 @@
 #include "Base.h"
 #include "CMD.h"
 #include "CMDS.h"
+#include "Connector.h"
+#include "Or.h"
+#include "And.h"
 
 using namespace std;
 

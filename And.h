@@ -9,7 +9,15 @@ class And : public Connector
     public:
          And(): Connector() {};
          And(Base *left, Base *right): Connector(left, right){};
-         void execute();
+         
+         void execute()
+         {
+           this->left->execute();
+           if(!this->left->getFail())
+           {
+             this->right->execute();
+           }
+         }
 };
 
 #endif

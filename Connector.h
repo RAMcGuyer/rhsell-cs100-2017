@@ -10,8 +10,12 @@ class Connector : public Base
         Base *right;
 
     public:
-        Connector();
-        Connector(Base *left, Base *right);
+        Connector() : Base(){};
+        Connector(Base *l, Base *r) : Base()
+        {
+          this->left = l;
+          this->right = r;
+        }
         virtual void execute()=0; 
 };
 

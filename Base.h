@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <string>
+#include <boost/tokenizer.hpp>
+#include <boost/algorithm/string/trim.hpp>
 using namespace std;
 class Base
 {
