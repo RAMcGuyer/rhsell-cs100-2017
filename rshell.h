@@ -16,11 +16,61 @@
 #include <stdlib.h>
 #include "Base.h"
 #include "CMD.h"
-#include "CMDS.h"
-#include "Connector.h"
-#include "Or.h"
-#include "And.h"
+#include "Interpreter.h"
 
 using namespace std;
+
+vector<string>* seperateConnectors(vector<string> &inputs)
+{
+    vector<string> *connectors = new vector<string>;
+    for(unsigned ctr = 0; ctr < inputs.size(); ctr++)
+    {
+        if((inputs.at(ctr)) == ";")
+        {
+            connectors->push_back(";");
+            ctr++;
+        }
+        if((inputs.at(ctr)) == "&")
+        {
+
+            connectors->push_back("&&");
+            ctr++;
+        }
+        else if((inputs.at(ctr)) == "|")
+        {
+            connectors->push_back("||");
+            ctr++;
+        }
+    }
+    return connectors;
+}
+
+vector<string>* seperateCmds(vector<string> &inputs)
+{
+    vector<string> *cmds = new vector<string>;
+    for(unsigned ctr = 0; ctr < inputs.size(); ctr++)
+    {
+        if((inputs.at(ctr)) == ";")
+        {
+            ctr++;
+        }
+        if((inputs.at(ctr)) == "&")
+        {
+
+            ctr++;
+        }
+        else if((inputs.at(ctr)) == "|")
+        {
+
+         ctr++;
+        }
+        else
+        {
+            cmds->push_back(inputs.at(ctr));
+        }
+    }
+    return cmds;
+}
+
 
 #endif

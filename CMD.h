@@ -41,45 +41,59 @@ class CMD : public Base
     to indicate the failure. 
   */
   void execute() 
-	{
-   pid_t pid;
-   int status;
-   string temp;
-   char* args[80];
+  {
+       pid_t pid;
+       int status;
+       string temp;
+       char* args[80];
    
-   cout << statement.at(0) << " " << statement.at(1) << endl;
-   for(unsigned i = 0; i < statement.size(); i++)
-   {
-     statement.at(i).erase(statement.at(i).find_last_not_of(" \n\t\r")+1);
-     args[i] = (char*) statement.at(i).c_str();
+       cout << statement.at(0) << " " << statement.at(1) << endl;
+       for(unsigned i = 0; i < statement.size(); i++)
+       {
+           statement.at(i).erase(statement.at(i).find_last_not_of(" \n\t\r")+1);
+           args[i] = (char*) statement.at(i).c_str();
+       }
+       args[statement.size()] = NULL;
+       if ((pid = fork()) < 0) //fork failed
+       {
+           printf("*** ERROR: fork failed\n");
+           exit(1);
+       }
+       else if (pid ==0) //fork to child
+       {
+           if (execvp(args[0], args) == -1) //if execvp failed
+           {
+               perror("exec");
+           } 
+       } 
+       else
+       {
+           while (wait(&status) != pid);
+
+           //this->setDidRun(true);
+
+           if(WEXITSTATUS(status) != 0)
+           {
+               Base::setFail(true);
+           }
+       }
    }
-   args[statement.size()] = NULL;
-   if ((pid = fork()) < 0) //fork failed
-   {
-     printf("*** ERROR: fork failed\n");
-     exit(1);
-   }
-   else if (pid ==0) //fork to child
-   {
-     if (execvp(args[0], args) == -1) //if execvp failed
-     {
-        perror("exec");
-     } 
-   } 
-   else
-   {
-      while (wait(&status) != pid);
-      if(WEXITSTATUS(status) == -1)
-      {
-        Base::setFail(true);
-      }
-   }
-}
 	
-    bool getFail()
-	{
-		return Base::getFail();
-	}
+  bool getFail()
+  {
+      return Base::getFail();
+  }
+  
+  bool getDidRun()
+  {
+      return Base::getDidRun();
+  }
+
+  void setDidRun(bool didRun)
+  {
+      return Base::setDidRun(didRun);
+  }
+ 
 };
 
 #endif

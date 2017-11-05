@@ -1,71 +1,18 @@
 #include "rshell.h"
 using namespace boost;
 
-queue<string>* seperateCmds(vector<string> &inputs)
-{
-    queue<string> *cmds = new queue<string>;
-    for(unsigned ctr = 0; ctr < inputs.size(); ctr++)
-    {    
-        if((inputs.at(ctr)) == ";")
-        {
-            ctr++;
-        }
-        if((inputs.at(ctr)) == "&")
-        {
-
-            ctr++;    
-        }
-        else if((inputs.at(ctr)) == "|")
-        {
-   
-         ctr++;   
-        }
-        else
-        {
-            cmds->push(inputs.at(ctr));
-        }
-    }
-    return cmds;
-}
-
-queue<string>* seperateConnectors(vector<string> &inputs)
-{
-    queue<string> *connectors = new queue<string>;
-    for(unsigned ctr = 0; ctr < inputs.size(); ctr++)
-    {
-        if((inputs.at(ctr)) == ";")
-        {
-            connectors->push(";");
-            ctr++;
-        }
-        if((inputs.at(ctr)) == "&")
-        {
-
-            connectors->push("&&");
-            ctr++;
-        }
-        else if((inputs.at(ctr)) == "|")
-        {
-            connectors->push("||");
-            ctr++;
-        }
-    }
-    return connectors;
-}
-
-
 
 int main()
 {
-	string input, joined;
+	string input;
         vector<string> inputs;
-        queue<string> *cmds;
-        queue<string> *connectors;
+        vector<string> *cmds;
+        vector<string> *connectors;
         vector<CMD> actualCmds;
 	cout << "$ ";
 	getline(cin, input);
 
-		//creating a tokenizer and what delimiters the seperate
+        //creating a tokenizer and what delimiters the seperate
 	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
 	boost::char_separator<char> sep("", ";&|");
 	tokenizer tokens(input, sep);
@@ -79,28 +26,22 @@ int main()
 
         connectors = seperateConnectors(inputs);
         cmds = seperateCmds(inputs);
-
-        while(!(cmds->empty()))
+               
+        for(unsigned i = 0; i < cmds->size(); i++)
         {
-            cout << "In cmd queue: " << cmds->front() << endl;
-
-            CMD tempCmd(cmds->front());
-            actualCmds.push_back(tempCmd);
-           
-            cmds->pop();
+            actualCmds.push_back(cmds->at(i));
         }
-        cout << endl;
-
-        while(!(connectors->empty()))
-        {
-            cout << "In connector queue: " << connectors->front() << endl;
-            connectors->pop();
-        }
+  
 
         for(unsigned i = 0; i < actualCmds.size(); i++)
         {
             actualCmds.at(i).execute();
         }
+
+        
+
+        Interpreter cmdInterpreter(actualCmds, connectors);
+        cmdInterpreter.interpret();
   	
 	return 0;  
 	
