@@ -15,6 +15,7 @@ class CMD : public Base
 	{
 		this->createStatement(s);
 	};
+        ~CMD() {};
 	
  /* CREATESTATEMENT
    Takes the string passsed into the constructor and creates a vector<string> for 
@@ -46,8 +47,13 @@ class CMD : public Base
        int status;
        string temp;
        char* args[80];
+
+       if(statement.size() == 1 && (statement.at(0) == "exit" || statement.at(0) == "Exit"))
+       {
+          cout << "exiting program" << endl;
+          exit(0);
+       }
    
-       //cout << statement.at(0) << " " << statement.at(1) << endl;
        for(unsigned i = 0; i < statement.size(); i++)
        {
            statement.at(i).erase(statement.at(i).find_last_not_of(" \n\t\r")+1);
@@ -77,6 +83,7 @@ class CMD : public Base
                Base::setFail(true);
            }
        }
+
    }
 	
   bool getFail()

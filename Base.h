@@ -19,6 +19,7 @@ class Base
             failed = false;
             didRun = false;
         };
+        virtual ~Base() {};
 		
         virtual void execute() = 0;
         

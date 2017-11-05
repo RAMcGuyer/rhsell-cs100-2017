@@ -5,8 +5,7 @@
 #include <cstring>
 #include <string>
 #include <boost/tokenizer.hpp>
-#include <boost/algorithm/string/trim.hpp>
-#include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string.hpp>
 #include <queue>
 #include <vector>
 #include <stdio.h>
