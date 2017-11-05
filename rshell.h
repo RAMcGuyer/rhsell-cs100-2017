@@ -41,6 +41,11 @@ vector<string>* seperateConnectors(vector<string> &inputs)
             connectors->push_back("||");
             ctr++;
         }
+        else if((inputs.at(ctr) == "#"))
+        {
+            connectors->push_back("#");
+            ctr++;
+        }
     }
     return connectors;
 }
@@ -50,7 +55,7 @@ vector<string>* seperateCmds(vector<string> &inputs)
     vector<string> *cmds = new vector<string>;
     for(unsigned ctr = 0; ctr < inputs.size(); ctr++)
     {
-        if((inputs.at(ctr)) == ";")
+        if((inputs.at(ctr)) == ";" || (inputs.at(ctr) == "#"))
         {
             ctr++;
         }

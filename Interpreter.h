@@ -27,29 +27,49 @@ class Interpreter
   void interpret()
   {
 
-    for(unsigned i = 0; i < connectors->size(); i++)
+    if(connectors->empty())
     {
-        if(!(executables.at(i).getDidRun())) //check if cmd already ran
+        executables.front().execute();
+    }
+    else
+    {
+        unsigned i = 0;
+        while (i < connectors->size())
         {
-            executables.at(i).execute();
-        }
-        if(connectors->at(i) == "&&") //check and logic
-        {
-            if(executables.at(i).getFail() == false)
+            cout << "getDidRun: " << executables.at(i).getDidRun() << endl;
+            if(!(executables.at(i).getDidRun())) //check if cmd already ran
             {
-                executables.at(i+1).execute();
+                executables.at(i).execute();
             }
-        }
-        else if(connectors->at(i) == "||") // check or logic
-        {
-            if(executables.at(i).getFail() == true)
+            if(connectors->at(i) == "&&") //check and logic
             {
-                executables.at(i+1).execute();
+                cout << executables.at(i).getFail() << endl;
+                if(executables.at(i).getFail() == false)
+                {
+                    executables.at(i+1).execute();
+                }
             }
-        }
-        else if(connectors->at(i) == "#") //check comments
+            else if(connectors->at(i) == "||") // check or logic
+            {
+                cout << executables.at(i).getFail() << endl;
+                if(executables.at(i).getFail() == true)
+                {
+                    executables.at(i+1).execute();
+                }               
+                else
+                {
+                  executables.at(i+1).setDidRun(true);
+                }
+            }
+            else if(connectors->at(i) == "#") //check comments
+            {
+                break;
+            }
+            i++;
+        } 
+        if(!(executables.at(i).getDidRun()) && connectors->at(i-1) != "#")
         {
-            break;
+          executables.at(i).execute();
         }
     }
    }

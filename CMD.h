@@ -47,7 +47,7 @@ class CMD : public Base
        string temp;
        char* args[80];
    
-       cout << statement.at(0) << " " << statement.at(1) << endl;
+       //cout << statement.at(0) << " " << statement.at(1) << endl;
        for(unsigned i = 0; i < statement.size(); i++)
        {
            statement.at(i).erase(statement.at(i).find_last_not_of(" \n\t\r")+1);
@@ -70,7 +70,7 @@ class CMD : public Base
        {
            while (wait(&status) != pid);
 
-           //this->setDidRun(true);
+           this->setDidRun(true);
 
            if(WEXITSTATUS(status) != 0)
            {
