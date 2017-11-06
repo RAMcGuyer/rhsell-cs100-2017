@@ -1,0 +1,7 @@
+ls
+ls -a
+echo hello
+echo death
+touch test.txt
+echo that totally worked!
+exit
