@@ -1,14 +1,15 @@
 CC = g++
 CC_FLAGS = -Wall -Werror -ansi -pedantic
-EXEC = test.out
-SOURCES = $(wildcard *.cpp)
-OBJECTS = $(SOURCES:.cpp=.o)
 
-$(EXEC): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $(EXEC)
+all:
+	rm -rf ./bin
+	mkdir -p ./bin
+	g++ -Wall -Werror -ansi -pedantic ./src/rshell.cpp -o ./bin/rshell
 
-%.o: %.cpp
-	$(CC) -c $(CC_FLAGS) $< -o $@
+rshell:
+	rm -rf ./bin
+	mkdir -p ./bin
+	g++ -Wall -Werror -ansi -pedantic ./src/rshell.cpp -o ./bin/rshell
 
 clean:
-	rm -f $(EXEC) $(OBJECTS)
+	rm -rf ./bin
