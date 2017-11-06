@@ -1,0 +1,10 @@
+clear && echo begin test!
+
+echo clearly works || echo clearly doesn't work!
+
+echo looks like it works! || echo that last command was mispelled!
+
+echo now lets do some semi-colons; echo and some ands && echo or maybe some ors || echo but forget this
+
+echo mommy || echo couldn't exit
+exit
