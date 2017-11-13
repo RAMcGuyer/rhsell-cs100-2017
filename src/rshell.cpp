@@ -10,7 +10,7 @@ int main()
         vector<string> inputs;
         vector<string> *cmds;
         vector<string> *connectors;
-        vector<Base*> actualCmds;
+        vector<CMD> actualCmds;
 	cout << "$ ";
 	getline(cin, input);
 
@@ -31,7 +31,7 @@ int main()
                
         for(unsigned i = 0; i < cmds->size(); i++)
         {
-            CMD* com = new CMD(cmds->at(i));
+            CMD com(cmds->at(i));
             actualCmds.push_back(com);
         }
   
@@ -40,10 +40,10 @@ int main()
         Interpreter cmdInterpreter(actualCmds, connectors);
         cmdInterpreter.interpret();
 
-        for(unsigned i = 0; i < actualCmds.size(); i++)
+        /*for(unsigned i = 0; i < actualCmds.size(); i++)
         {
             delete actualCmds.at(i);
-        }
+        }*/
         delete cmds;
         delete connectors;
       }	
