@@ -45,7 +45,6 @@ class CMD : public Base
   {
        pid_t pid;
        int status;
-       string temp;
        char* args[80];
 
        if(statement.size() == 1 && (statement.at(0) == "exit" || statement.at(0) == "Exit"))
@@ -59,7 +58,9 @@ class CMD : public Base
            statement.at(i).erase(statement.at(i).find_last_not_of(" \n\t\r")+1);
            args[i] = (char*) statement.at(i).c_str();
        }
+       
        args[statement.size()] = NULL;
+       
        if ((pid = fork()) < 0) //fork failed
        {
            printf("*** ERROR: fork failed\n");
@@ -78,7 +79,7 @@ class CMD : public Base
            while (wait(&status) != pid);
 
            this->setDidRun(true);
-
+           cout << "WEXITSTATUS: " << WEXITSTATUS(status) << endl;
            if(WEXITSTATUS(status) != 0)
            {
                this->Base::setFail(true);
