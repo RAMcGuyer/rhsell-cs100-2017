@@ -70,6 +70,7 @@ class CMD : public Base
            if (execvp(args[0], args) == -1) //if execvp failed
            {
                perror("exec");
+		exit(1);
            } 
        } 
        else
@@ -80,7 +81,7 @@ class CMD : public Base
 
            if(WEXITSTATUS(status) != 0)
            {
-               Base::setFail(true);
+               this->Base::setFail(true);
            }
        }
 

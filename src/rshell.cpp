@@ -16,7 +16,7 @@ int main()
 
         //creating a tokenizer and what delimiters the seperate
 	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
-	boost::char_separator<char> sep("", ";&|#");
+	boost::char_separator<char> sep("", ";&|#()");
 	tokenizer tokens(input, sep);
 		
 	//iterating through your tokenizer and putting it into a vector
@@ -26,25 +26,36 @@ int main()
 		inputs.push_back(*tok_iter);
 	}
 
+	/*for(unsigned i = 0; i < inputs.size(); i++)
+        {
+                cout << inputs.at(i) << endl;
+        }*/
+
         connectors = seperateConnectors(inputs);
         cmds = seperateCmds(inputs);
+	
+	/*for(unsigned i = 0; i < cmds->size(); i++)
+        {
+                cout << cmds->at(i) << endl;
+        }*/
+
                
         for(unsigned i = 0; i < cmds->size(); i++)
         {
-          	if((cmds->at(i).substr(0,4) == "test") || (cmds->at(i).at(0) == '['))
+          	/*if((cmds->at(i).substr(0,4) == "test") || (cmds->at(i).at(0) == '['))
 		{
 			Test* test = new Test(cmds->at(i));
 			actualCmds.push_back(test);
-		}
-		else
-		{
+		}*/
+		//if
+		//{
 			CMD* com = new CMD(cmds->at(i));
             		actualCmds.push_back(com);
-		}
+		//}
         }
 
-        //Interpreter cmdInterpreter(actualCmds, connectors);
-        //cmdInterpreter.interpret();
+        Interpreter cmdInterpreter(actualCmds, connectors);
+        cmdInterpreter.interpret();
 
         for(unsigned i = 0; i < actualCmds.size(); i++)
         {
