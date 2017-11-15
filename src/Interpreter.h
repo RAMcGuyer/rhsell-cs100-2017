@@ -43,23 +43,28 @@ class Interpreter
             }
             if(connectors->at(i) == "&&") //check and logic
             {
-                //cout << "getFail@&&: " << executables.at(i).getFail() << endl;
-		if(executables.at(i)->getFail() == false)
-                {
-			executables.at(i+1)->execute();
-                }
+             // cout << "getFail@&&: " << executables.at(i)->getFail() << endl;
+		          if(executables.at(i)->getFail() == false)
+              {
+                executables.at(i+1)->execute();
+              }
+              else
+              {
+                executables.at(i+1)->setDidRun(true);
+                executables.at(i+1)->setFail(true);
+              }
             }
             else if(connectors->at(i) == "||") // check or logic
             {
-                //cout << "getFail@||: " << executables.at(i).getFail() << endl;
-		if(executables.at(i)->getFail() == true)
-                {
-                    executables.at(i+1)->execute();
-                }               
-                else
-                {
-                  executables.at(i+1)->setDidRun(true);
-                }
+              //cout << "getFail@||: " << executables.at(i)->getFail() << endl;
+		          if(executables.at(i)->getFail() == true)
+              {
+                executables.at(i+1)->execute();
+              }               
+              else
+              {
+                executables.at(i+1)->setDidRun(true);
+              }
             }
             else if(connectors->at(i) == "#") //check comments
             {

@@ -82,6 +82,7 @@ class CMD : public Base
            //cout << "WEXITSTATUS: " << WEXITSTATUS(status) << endl;
            if(WEXITSTATUS(status) != 0)
            {
+               cout << "Setting to fail" << endl;
                this->Base::setFail(true);
            }
        }
