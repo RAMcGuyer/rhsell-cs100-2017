@@ -1,5 +1,5 @@
-#ifndef __CMD_H__
-#define __CMD_H__
+#ifndef __TEST_H__
+#define __TEST_H__
 #include "Base.h"
 #include <sys/stat.h>
 
@@ -13,12 +13,12 @@ private:
   //Returns 0, 1 or 2 depending on flag type. 0 is default or -e
   unsigned checkFlag()
   {
-    unsigned flagVal
-    if(text.at(0) == "-d")
+    unsigned flagVal;
+    if(test.at(0) == "-d")
     {
       flagVal = 1;
     }
-    else if(text.at(0) == "-f")
+    else if(test.at(0) == "-f")
     {
       flagVal = 2;
     }
@@ -32,20 +32,23 @@ private:
 public:
 
   // CONSTRUCTOR //
-  Test(String s): Base()
+  Test(string s): Base()
   {
     err = false;
     setTest(s);
   }
   
+  // DECONSTRUCTOR //
   ~Test(){};
   
   // PUBLIC FUNCTIONS //
   void setTest(string s)
   {
-    if(s.front() == "[")
+    //test, delete later
+    cout << "s before substr(): " << s << endl;
+    if(s.at(0) == '[')
     {
-      if(s.back() == "]")
+      if(s.at(s.size()-1) == ']')
       {
         s = s.substr(1, s.size()-3);
       }
@@ -59,6 +62,8 @@ public:
       s = s.substr(4);
     }
     
+    //test, delete later
+    cout << "s after substr(): " << s << endl;
     typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
     boost::char_separator<char> sep(" ");
     tokenizer tokens(s, sep);
@@ -68,7 +73,14 @@ public:
 	  	 tok_iter != tokens.end(); ++tok_iter)
 	  {
 	  	this->test.push_back(*tok_iter);
-	  }    
+	  } 
+    
+    //test, delete later
+    cout << "Contents of test: " << endl;
+    for(unsigned j = 0; j < test.size(); j++)
+    {
+      cout << "Index: " << j << " -- " << test.at(j) << endl;
+    }   
   } //end setTest
   
   void execute()
@@ -78,14 +90,22 @@ public:
     bool result;
     flagCode = checkFlag();
     
+  test.at(test.size()-1).erase(test.at(test.size()-1).find_last_not_of(" \n\t\r")+1);
     if(err)
     {
       result = false;
     }
     else
     {
-      
-      if(stat(test.at(test.size()-1), &buf) != 0);
+      char* c[1];
+      c[0] = (char*) test.at(test.size()-1).c_str();
+      /*
+          Takes last spot in test vector, (the index containing the file path)
+        and passes that string into stat(). If is a valid path, the bool result will
+        be set to true, unless the user specifies a flag, in which case that will
+        also be checked. The result will be true if the file found matches the flag. 
+      */
+      if(stat(c[0], &buf) != 0);
       {
         if(flagCode == 0)
         {
@@ -114,7 +134,7 @@ public:
           }
         }
       }
-    }
+    } //end flag checking file validation
     
     this->setDidRun(true);
     if(result)

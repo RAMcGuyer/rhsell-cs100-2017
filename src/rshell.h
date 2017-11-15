@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include "Base.h"
 #include "CMD.h"
+#include "Test.h"
 #include "Interpreter.h"
 
 using namespace std;
