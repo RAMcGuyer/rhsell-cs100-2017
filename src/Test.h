@@ -36,7 +36,7 @@ public:
   {
     err = false;
     setTest(s);
-  }
+  }git 
   
   // DECONSTRUCTOR //
   ~Test(){};
