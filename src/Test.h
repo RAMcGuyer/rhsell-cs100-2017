@@ -101,11 +101,17 @@ public:
         be set to true, unless the user specifies a flag, in which case that will
         also be checked. The result will be true if the file found matches the flag. 
       */
-      if(stat(c[0], &buf) != 0);
+      //cout << "test.at(size()-1): " << test.at(test.size()-1) << endl;
+      if(stat(c[0], &buf) == 0)
       {
+      //cout << "inside stat()" << endl;
+      //cout << "buf mode_t: " << buf.st_mode << endl;
         if(flagCode == 0)
         {
-          result = true;
+          if(S_ISDIR(buf.st_mode) != 0 || S_ISREG(buf.st_mode) != 0)
+          {
+            result = true;
+          }
         }
         else if(flagCode == 1)
         {
@@ -121,6 +127,10 @@ public:
             result = true;
           }
         }
+      }
+      else
+      {
+        perror("stat");
       }
     } //end flag checking file validation
     
