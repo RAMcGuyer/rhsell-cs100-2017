@@ -45,7 +45,7 @@ public:
   void setTest(string s)
   {
     //test, delete later
-    cout << "s before substr(): " << s << endl;
+//    cout << "s before substr(): " << s << endl;
     if(s.at(0) == '[')
     {
       if(s.at(s.size()-1) == ']')
@@ -63,7 +63,7 @@ public:
     }
     
     //test, delete later
-    cout << "s after substr(): " << s << endl;
+  //  cout << "s after substr(): " << s << endl;
     typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
     boost::char_separator<char> sep(" ");
     tokenizer tokens(s, sep);
@@ -76,11 +76,11 @@ public:
 	  } 
     
     //test, delete later
-    cout << "Contents of test: " << endl;
-    for(unsigned j = 0; j < test.size(); j++)
+    //cout << "Contents of test: " << endl;
+    /*for(unsigned j = 0; j < test.size(); j++)
     {
       cout << "Index: " << j << " -- " << test.at(j) << endl;
-    }   
+    }*/   
   } //end setTest
   
   void execute()

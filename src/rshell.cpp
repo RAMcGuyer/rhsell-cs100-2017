@@ -26,18 +26,18 @@ int main()
 		  inputs.push_back(*tok_iter);
 	  }
 
-	  for(unsigned i = 0; i < inputs.size(); i++)
+	  /*for(unsigned i = 0; i < inputs.size(); i++)
     {
        cout << inputs.at(i) << endl;
-    }
+    }*/
 
     connectors = seperateConnectors(inputs);
     cmds = seperateCmds(inputs);
 	
-	  for(unsigned i = 0; i < cmds->size(); i++)
+	  /*for(unsigned i = 0; i < cmds->size(); i++)
     {
       cout << cmds->at(i) << endl;
-    }
+    }*/
 
                
     for(unsigned i = 0; i < cmds->size(); i++)

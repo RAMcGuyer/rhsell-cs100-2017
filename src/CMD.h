@@ -79,7 +79,7 @@ class CMD : public Base
            while (wait(&status) != pid);
 
            this->setDidRun(true);
-           cout << "WEXITSTATUS: " << WEXITSTATUS(status) << endl;
+           //cout << "WEXITSTATUS: " << WEXITSTATUS(status) << endl;
            if(WEXITSTATUS(status) != 0)
            {
                this->Base::setFail(true);
