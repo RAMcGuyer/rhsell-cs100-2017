@@ -64,6 +64,7 @@ class Interpreter
               else
               {
                 executables.at(i+1)->setDidRun(true);
+                executables.at(i+1)->setFail(true);
               }
             }
             else if(connectors->at(i) == "#") //check comments
