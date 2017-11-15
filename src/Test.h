@@ -36,7 +36,7 @@ public:
   {
     err = false;
     setTest(s);
-  }git 
+  }
   
   // DECONSTRUCTOR //
   ~Test(){};
@@ -87,15 +87,11 @@ public:
   {
     unsigned flagCode;
     struct stat buf;
-    bool result;
+    bool result = false;
     flagCode = checkFlag();
     
   test.at(test.size()-1).erase(test.at(test.size()-1).find_last_not_of(" \n\t\r")+1);
-    if(err)
-    {
-      result = false;
-    }
-    else
+    if(!err)
     {
       char* c[1];
       c[0] = (char*) test.at(test.size()-1).c_str();
@@ -113,24 +109,16 @@ public:
         }
         else if(flagCode == 1)
         {
-          if(S_ISDIR(buf.st_mode) == 0)
+          if(S_ISDIR(buf.st_mode) != 0)
           {
             result = true;
-          }
-          else
-          {
-            result = false;
           }
         }
         else if(flagCode == 2)
         {
-          if(S_ISREG(buf.st_mode) == 0)
+          if(S_ISREG(buf.st_mode) != 0)
           {
             result = true;
-          }
-          else
-          {
-            result = false;
           }
         }
       }
